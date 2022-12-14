@@ -35,7 +35,7 @@ def send_notifcation(upcoming_ipo_bool):
         notification.notify(
             title = 'Daily OpenAI IPO Update',
             message = 'No additonal details on OpenAI IPO status.',
-            app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
+            app_icon = '/home/kr/repos/api-personal-project/pictures/scriptpic.jpeg',
             timeout = 5
         )
 
