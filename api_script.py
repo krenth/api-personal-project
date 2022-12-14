@@ -15,15 +15,24 @@ def get_data(url, headers):
     return data
 
 def check_data(data):
-    upcoming_ipo_bool = false
+    upcoming_ipo_bool = False
     if 'OpenAI' in data:
-        upcoming_ipo_bool = true
+        upcoming_ipo_bool = True
     return upcoming_ipo_bool
 
+def send_notifcation(upcoming_ipo_bool):
+    if upcoming_ipo_bool:
+        notification.notify(
+            title = 'Daily OpenAI IPO Update',
+            message = 'OpenAI is finally an upcoming IPO!',
+            app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
+            timeout = 10
+        )
+    else:
+        notification.notify(
+            title = 'Daily OpenAI IPO Update',
+            message = 'No additonal details on OpenAI IPO status.',
+            app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
+            timeout = 10
+        )
 
-
-
-
-    
-
-    
