@@ -10,7 +10,7 @@ stock_analysis_headers = {
 }
 
 def get_data(url, headers):
-    response = requests.request("GET", stock_analysis_Url, headers=headers)
+    response = requests.request("GET", stock_analysis_url, headers=headers)
     data = response.json()
     data = data['data']
     return data
@@ -38,4 +38,9 @@ def send_notifcation(upcoming_ipo_bool):
             app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
             timeout = 5
         )
+
+data = get_data(stock_analysis_url, stock_analysis_headers)
+message_bool = check_data(data)
+send_notifcation(message_bool)
+
         
