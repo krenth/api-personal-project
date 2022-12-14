@@ -5,9 +5,8 @@ from playsound import playsound
 import PySimpleGUI as sg
 
 
-
 def get_data(url, headers):
-    response = requests.request("GET", stock_analysis_url, headers=headers)
+    response = requests.request("GET", url, headers=headers)
     data = response.json()
     data = data['data']
     return data
@@ -41,9 +40,28 @@ def run_script():
     stock_analysis_headers = {
 	    "X-RapidAPI-Key": "f7b5875d5emsh4d9c9bbb1502f01p10e1f8jsnd8f03f3933ef",
 	    "X-RapidAPI-Host": "upcoming-ipo-calendar.p.rapidapi.com"
-    }
-    
+    }   
     data = get_data(stock_analysis_url, stock_analysis_headers)
     message_bool = check_data(data)
     send_notifcation(message_bool)
+
+   
+############ GUI START ################
+sg.theme('DarkBlue2')
+layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
+          [sg.Text('Email:'), sg.InputText()],
+          [sg.Button('Exit'),sg.Push(),sg.Button('OK')]]
+
+window = sg.Window('OpenAI Script', layout)
+
+while True:
+    event, values = window.read()
+    if event in (sg.WINDOW_CLOSED, 'Exit'):
+        break
+    if event == "OK":
+        sg.popup_error("Not yet implemented")
+       
+window.close()
+    
+    
     
