@@ -1,7 +1,9 @@
 import requests
 import json
 from plyer import notification
-from playsound import playsound 
+from playsound import playsound
+import PySimpleGUI as sg
+
 
 
 def get_data(url, headers):
@@ -40,6 +42,7 @@ def run_script():
 	    "X-RapidAPI-Key": "f7b5875d5emsh4d9c9bbb1502f01p10e1f8jsnd8f03f3933ef",
 	    "X-RapidAPI-Host": "upcoming-ipo-calendar.p.rapidapi.com"
     }
+    
     data = get_data(stock_analysis_url, stock_analysis_headers)
     message_bool = check_data(data)
     send_notifcation(message_bool)
