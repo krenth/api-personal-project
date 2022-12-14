@@ -23,17 +23,19 @@ def check_data(data):
 
 def send_notifcation(upcoming_ipo_bool):
     if upcoming_ipo_bool:
+        playsound('/home/kr/repos/api-personal-project/sounds/desktop_notification.mp3')
         notification.notify(
             title = 'Daily OpenAI IPO Update',
             message = 'OpenAI is finally an upcoming IPO!',
             app_icon = '/home/kr/repos/api-personal-project/pictures/scriptpic.jpeg',
-            timeout = 10
+            timeout = 5
         )
     else:
+        playsound('/home/kr/repos/api-personal-project/sounds/desktop_notification.mp3')
         notification.notify(
             title = 'Daily OpenAI IPO Update',
             message = 'No additonal details on OpenAI IPO status.',
             app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
-            timeout = 10
+            timeout = 5
         )
         
