@@ -13,11 +13,14 @@ def get_data(url, headers):
     data = data['data']
     return data
 
+<<<<<<< HEAD
 def check_data(data):
     upcoming_ipo_bool = false
     if 'OpenAI' in data:
         upcoming_ipo_bool = true
     return upcoming_ipo_bool
+=======
+>>>>>>> 11559925cba390582ec302cc3219c5d3ee89c8e3
 
 
 
