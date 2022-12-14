@@ -1,6 +1,7 @@
 import requests
 import json
 from plyer import notification
+from playsound import playsound 
 
 stock_analysis_url = "https://upcoming-ipo-calendar.p.rapidapi.com/ipo-calendar"
 stock_analysis_headers = {
@@ -25,7 +26,7 @@ def send_notifcation(upcoming_ipo_bool):
         notification.notify(
             title = 'Daily OpenAI IPO Update',
             message = 'OpenAI is finally an upcoming IPO!',
-            app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
+            app_icon = '/home/kr/repos/api-personal-project/pictures/scriptpic.jpeg',
             timeout = 10
         )
     else:
@@ -35,4 +36,4 @@ def send_notifcation(upcoming_ipo_bool):
             app_icon = '/home/kr/repos/api-personal-project/scriptpic.jpeg',
             timeout = 10
         )
-
+        
