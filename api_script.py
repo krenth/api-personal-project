@@ -2,8 +2,6 @@ import requests
 import json
 from plyer import notification
 from playsound import playsound 
-import schedule
-import time
 
 stock_analysis_url = "https://upcoming-ipo-calendar.p.rapidapi.com/ipo-calendar"
 stock_analysis_headers = {
