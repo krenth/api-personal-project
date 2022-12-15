@@ -46,9 +46,16 @@ def run_script():
     message_bool = check_data(data)
     send_notifcation(message_bool)
     
+def check_email(email_input):
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if(re.fullmatch(regex, email_input)):
+        return True
+    else:
+        return False
+    
 def main_window():
     sg.theme('DarkBlue2')
-    layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
+    layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Emailed Script Findings'),sg.Push()],
               [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=True), sg.Button('Confirm', s=7),],
               [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
     
@@ -61,21 +68,31 @@ def main_window():
         if event in (sg.WINDOW_CLOSED, 'Exit'):
             break
         if event == 'Confirm' and valid_email:
-            window.hide()
-            sg.popup_ok("Press ok to verify your email address", title='Confirm Email', keep_on_top=True, modal=True)
+            #confirm_email_window(email_input)
             window.UnHide()
-        elif not valid_email:
+        elif not valid_email and event == 'Confirm':
             sg.popup_error("Invalid or No email typed.")
         if event == 'Run':
             sg.popup_error("Not yet implemented")
     window.close()
+
+def confirm_email_window (email_input):
+    sg.theme('DarkBlue2')
+    layout = [[sg.Text('Press Confirm to verify that ' + email_input + 'is correct and that you wish to recieve emailed script findings')],
+              [sg.Button('Confirm', s=7)]]
+    window = sg.Window("Confirm Email", layout)
     
-def check_email(email_input):
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    if(re.fullmatch(regex, email_input)):
-        return True
-    else:
-        return False
+    while True:
+        event, values = window.read()
+        if event in (sg.WINDOW_CLOSED):
+            break
+        elif event == 'Confirm':
+            sg.popup_ok('Congragulations! Your email has been verified.')
+            break
+    window.close()
+    
+    
+
     
 
    
