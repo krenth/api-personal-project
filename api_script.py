@@ -57,15 +57,15 @@ def main_window():
     sg.theme('DarkBlue2')
     layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Emailed Script Updates'),sg.Push()],
               [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=False, ), sg.Button('Confirm', s=7, bind_return_key=True),],
-              [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
+              [sg.Button('Dont Show Again', s=20)]]
     
-    window = sg.Window("OpenAi Script", layout, font='FiraCode, 11')
+    window = sg.Window("Email Verification", layout, font='FiraCode, 11', element_justification='c')
     
     while True:
         event, values = window.read()
         email_input = str(values['email_key'])
         valid_email = check_email(email_input)
-        if event in (sg.WINDOW_CLOSED, 'Exit'):
+        if event == sg.WINDOW_CLOSED:
             break
         if event == 'Confirm' and valid_email:
             window.hide()
@@ -75,7 +75,7 @@ def main_window():
             window.hide()
             invalid_email_window()
             window.UnHide()
-        if event == 'Run':
+        if event == 'Dont Show Again':
             sg.popup_error("Not yet implemented")
     window.close()
 
