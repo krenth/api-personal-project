@@ -83,7 +83,7 @@ def confirm_email_window (email_input):
     sg.theme('DarkBlue2')
     layout = [[sg.Text('Press Confirm to verify that ' + email_input + ' is correct')],
               [sg.Button('Confirm', s=7)]]
-    window = sg.Window("Confirm Email", layout)
+    window = sg.Window("Confirm Email", layout, element_justification='c')
     
     while True:
         event, values = window.read()
@@ -91,14 +91,27 @@ def confirm_email_window (email_input):
             break
         if event == 'Confirm':
             window.hide()
-            sg.popup_ok('Your email is now verified!')
+            verified_email()
             window.close()
             
 def invalid_email_window():
     sg.theme('DarkBlue2')
     layout = [[sg.Text('Invalid Email')],
               [sg.Button('OK', s=7)]]
-    window=sg.Window('Error', layout)
+    window = sg.Window('Error', layout)
+    
+    while True:
+        event,values = window.read()
+        if event == sg.WINDOW_CLOSED:
+            break
+        if event == 'OK':
+            window.close()
+
+def verified_email():
+    sg.theme('DarkBlue2')
+    layout = [[sg.Text('Your email is now verified!')],
+               [sg.Button('OK', s=7)]]
+    window = sg.Window('Verified', layout, element_justification='c')
     
     while True:
         event,values = window.read()
