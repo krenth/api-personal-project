@@ -51,16 +51,22 @@ def run_script():
 ############ GUI START ################
 sg.theme('DarkBlue2')
 layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
-          [sg.Text('Email:'), sg.InputText(), sg.Button('Confirm', s=7),],
-          [sg.Button('Exit', s=7),sg.Push(),sg.Button('OK', s=7)]]
+          [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=True), sg.Button('Confirm', s=7),],
+          [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
 
 window = sg.Window('OpenAI Script', layout)
 
 while True:
     event, values = window.read()
+    email_input = values['email_key']
+    print(email_input)
     if event in (sg.WINDOW_CLOSED, 'Exit'):
         break
-    if event == "OK" or event == "Confirm":
+    if event == 'Confirm' and email_input != "":
+        sg.popup_error("working")
+    elif event == 'Confirm' and email_input == "":
+        sg.popup_error("No email typed")
+    elif event == 'Run':
         sg.popup_error("Not yet implemented")
        
 window.close()
