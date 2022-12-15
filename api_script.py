@@ -76,7 +76,7 @@ def main_window():
             invalid_email_window()
             window.UnHide()
         if event == 'Dont Show Again':
-            sg.popup_error("Not yet implemented")
+            break
     window.close()
 
 def confirm_email_window (email_input):
