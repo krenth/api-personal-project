@@ -59,7 +59,7 @@ def main_window():
               [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=False, ), sg.Button('Confirm', s=7, bind_return_key=True),],
               [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
     
-    window = sg.Window("OpenAi Script", layout)
+    window = sg.Window("OpenAi Script", layout, font='FiraCode, 11')
     
     while True:
         event, values = window.read()
@@ -83,7 +83,7 @@ def confirm_email_window (email_input):
     sg.theme('DarkBlue2')
     layout = [[sg.Text('Press Confirm to verify that ' + email_input + ' is correct')],
               [sg.Button('Confirm', s=7)]]
-    window = sg.Window("Confirm Email", layout, element_justification='c')
+    window = sg.Window("Confirm Email", layout, element_justification='c', font='FiraCode, 11')
     
     while True:
         event, values = window.read()
@@ -98,11 +98,11 @@ def invalid_email_window():
     sg.theme('DarkBlue2')
     layout = [[sg.Text('Invalid Email')],
               [sg.Button('OK', s=7)]]
-    window = sg.Window('Error', layout)
+    window = sg.Window('Error', layout, font='FiraCode, 11')
     
     while True:
         event,values = window.read()
-        if event == sg.WINDOW_CLOSED:
+        if event == sg.WINDOW_CLOSED:         
             break
         if event == 'OK':
             window.close()
@@ -111,7 +111,7 @@ def verified_email():
     sg.theme('DarkBlue2')
     layout = [[sg.Text('Your email is now verified!')],
                [sg.Button('OK', s=7)]]
-    window = sg.Window('Verified', layout, element_justification='c')
+    window = sg.Window('Verified', layout, element_justification='c', font='FiraCode, 11')
     
     while True:
         event,values = window.read()
