@@ -52,6 +52,7 @@ def check_email(email_input):
         return True
     else:
         return False
+    
 
    
 ############ GUI START ################
@@ -66,10 +67,13 @@ while True:
     event, values = window.read()
     email_input = values['email_key']
     valid_email = check_email(email_input)
+    
     if event in (sg.WINDOW_CLOSED, 'Exit'):
         break
     if event == 'Confirm' and valid_email:
-        sg.popup_error("Email entered correctly")
+        window.hide()
+        sg.popup_ok("Press ok to verify your email address", title='Confirm Email', keep_on_top=True, modal=True)
+        window.UnHide()
     elif not valid_email:
         sg.popup_error("Invalid or No email typed.")
     if event == 'Run':
