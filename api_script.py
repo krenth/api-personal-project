@@ -56,7 +56,7 @@ def check_email(email_input):
 def main_window():
     sg.theme('DarkBlue2')
     layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Emailed Script Updates'),sg.Push()],
-              [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=False, ), sg.Button('Confirm', s=7),],
+              [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=False, ), sg.Button('Confirm', s=7, bind_return_key=True),],
               [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
     
     window = sg.Window("OpenAi Script", layout)
@@ -72,14 +72,14 @@ def main_window():
             confirm_email_window(email_input)
             window.UnHide()
         elif not valid_email and event == 'Confirm':
-            sg.popup_error("Invalid or No email typed.")
+            sg.popup_ok("Invalid email, please try again", title= 'Error', button_color='white')
         if event == 'Run':
             sg.popup_error("Not yet implemented")
     window.close()
 
 def confirm_email_window (email_input):
     sg.theme('DarkBlue2')
-    layout = [[sg.Text('Press \"Confirm\" to verify that ' + email_input + ' is correct, and that you wish to receive emailed script updates')],
+    layout = [[sg.Text('Press \"Confirm\" to verify that ' + email_input + ' is correct')],
               [sg.Button('Confirm', s=7)]]
     window = sg.Window("Confirm Email", layout)
     
@@ -89,7 +89,7 @@ def confirm_email_window (email_input):
             break
         if event == 'Confirm':
             window.hide()
-            sg.popup_ok('Congragulations! Your email has been verified.')
+            sg.popup_ok('Your email is now verified!')
             window.close()
     
     
