@@ -44,13 +44,15 @@ def run_script():
     data = get_data(stock_analysis_url, stock_analysis_headers)
     message_bool = check_data(data)
     send_notifcation(message_bool)
+    
+
 
    
 ############ GUI START ################
 sg.theme('DarkBlue2')
 layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
-          [sg.Text('Email:'), sg.InputText()],
-          [sg.Button('Exit'),sg.Push(),sg.Button('OK')]]
+          [sg.Text('Email:'), sg.InputText(), sg.Button('Confirm', s=7),],
+          [sg.Button('Exit', s=7),sg.Push(),sg.Button('OK', s=7)]]
 
 window = sg.Window('OpenAI Script', layout)
 
@@ -58,7 +60,7 @@ while True:
     event, values = window.read()
     if event in (sg.WINDOW_CLOSED, 'Exit'):
         break
-    if event == "OK":
+    if event == "OK" or event == "Confirm":
         sg.popup_error("Not yet implemented")
        
 window.close()
