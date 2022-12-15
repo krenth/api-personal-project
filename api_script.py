@@ -55,20 +55,21 @@ def check_email(email_input):
     
 def main_window():
     sg.theme('DarkBlue2')
-    layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Emailed Script Findings'),sg.Push()],
-              [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=True), sg.Button('Confirm', s=7),],
+    layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Emailed Script Updates'),sg.Push()],
+              [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=False, ), sg.Button('Confirm', s=7),],
               [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
     
     window = sg.Window("OpenAi Script", layout)
     
     while True:
         event, values = window.read()
-        email_input = values['email_key']
+        email_input = str(values['email_key'])
         valid_email = check_email(email_input)
         if event in (sg.WINDOW_CLOSED, 'Exit'):
             break
         if event == 'Confirm' and valid_email:
-            #confirm_email_window(email_input)
+            window.hide()
+            confirm_email_window(email_input)
             window.UnHide()
         elif not valid_email and event == 'Confirm':
             sg.popup_error("Invalid or No email typed.")
@@ -78,18 +79,18 @@ def main_window():
 
 def confirm_email_window (email_input):
     sg.theme('DarkBlue2')
-    layout = [[sg.Text('Press Confirm to verify that ' + email_input + 'is correct and that you wish to recieve emailed script findings')],
+    layout = [[sg.Text('Press \"Confirm\" to verify that ' + email_input + ' is correct, and that you wish to receive emailed script updates')],
               [sg.Button('Confirm', s=7)]]
     window = sg.Window("Confirm Email", layout)
     
     while True:
         event, values = window.read()
-        if event in (sg.WINDOW_CLOSED):
+        if event == sg.WINDOW_CLOSED:
             break
-        elif event == 'Confirm':
+        if event == 'Confirm':
+            window.hide()
             sg.popup_ok('Congragulations! Your email has been verified.')
-            break
-    window.close()
+            window.close()
     
     
 
