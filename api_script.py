@@ -3,6 +3,7 @@ import json
 from plyer import notification
 from playsound import playsound
 import PySimpleGUI as sg
+import re
 
 
 def get_data(url, headers):
@@ -45,7 +46,12 @@ def run_script():
     message_bool = check_data(data)
     send_notifcation(message_bool)
     
-
+def check_email(email_input):
+    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if(re.fullmatch(regex, email_input)):
+        return True
+    else:
+        return False
 
    
 ############ GUI START ################
@@ -59,14 +65,14 @@ window = sg.Window('OpenAI Script', layout)
 while True:
     event, values = window.read()
     email_input = values['email_key']
-    print(email_input)
+    valid_email = check_email(email_input)
     if event in (sg.WINDOW_CLOSED, 'Exit'):
         break
-    if event == 'Confirm' and email_input != "":
-        sg.popup_error("working")
-    elif event == 'Confirm' and email_input == "":
-        sg.popup_error("No email typed")
-    elif event == 'Run':
+    if event == 'Confirm' and valid_email:
+        sg.popup_error("Email entered correctly")
+    elif not valid_email:
+        sg.popup_error("Invalid or No email typed.")
+    if event == 'Run':
         sg.popup_error("Not yet implemented")
        
 window.close()
