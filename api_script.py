@@ -46,6 +46,30 @@ def run_script():
     message_bool = check_data(data)
     send_notifcation(message_bool)
     
+def main_window():
+    sg.theme('DarkBlue2')
+    layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
+              [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=True), sg.Button('Confirm', s=7),],
+              [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
+    
+    window = sg.Window("OpenAi Script", layout)
+    
+    while True:
+        event, values = window.read()
+        email_input = values['email_key']
+        valid_email = check_email(email_input)
+        if event in (sg.WINDOW_CLOSED, 'Exit'):
+            break
+        if event == 'Confirm' and valid_email:
+            window.hide()
+            sg.popup_ok("Press ok to verify your email address", title='Confirm Email', keep_on_top=True, modal=True)
+            window.UnHide()
+        elif not valid_email:
+            sg.popup_error("Invalid or No email typed.")
+        if event == 'Run':
+            sg.popup_error("Not yet implemented")
+    window.close()
+    
 def check_email(email_input):
     regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     if(re.fullmatch(regex, email_input)):
@@ -56,30 +80,7 @@ def check_email(email_input):
 
    
 ############ GUI START ################
-sg.theme('DarkBlue2')
-layout = [[sg.Push(),sg.Text('Enter Your Email Below To Recieve Daily Updates'),sg.Push()],
-          [sg.Text('Email:'), sg.Input(key= 'email_key', do_not_clear=True), sg.Button('Confirm', s=7),],
-          [sg.Button('Exit', s=7),sg.Push(),sg.Button('Run', s=7)]]
-
-window = sg.Window('OpenAI Script', layout)
-
-while True:
-    event, values = window.read()
-    email_input = values['email_key']
-    valid_email = check_email(email_input)
-    
-    if event in (sg.WINDOW_CLOSED, 'Exit'):
-        break
-    if event == 'Confirm' and valid_email:
-        window.hide()
-        sg.popup_ok("Press ok to verify your email address", title='Confirm Email', keep_on_top=True, modal=True)
-        window.UnHide()
-    elif not valid_email:
-        sg.popup_error("Invalid or No email typed.")
-    if event == 'Run':
-        sg.popup_error("Not yet implemented")
-       
-window.close()
+main_window()
     
     
     
