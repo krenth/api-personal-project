@@ -11,7 +11,6 @@ Skills to be Demonstrated:
 
 - Collecting useful data in python from various websites using the help of APIs
 - Having the data being sent to an email address entered by the user (myself)
-- The creation of GUIs in python
 - The creation and cloning of a Github repository onto my local machine
 - Using Git to manage changes, workflow, and documentation of my project
 - Using the linux-based terminal to navigate, create, and order different files and directories based on the requirements for the project
